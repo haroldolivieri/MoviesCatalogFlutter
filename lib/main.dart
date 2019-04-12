@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/data/service.dart';
 import 'package:movies_list/src/interactor.dart';
-import 'package:movies_list/src/screens/movies_fetch.dart';
+import 'package:movies_list/src/routes/movies_list_route.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Awesome Movies List',
       theme: ThemeData(
         fontFamily: 'Montserrat',
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.black,
         splashColor: Colors.white12.withOpacity(0.1),
       ),
-      home: MoviesFetch(interactor: MoviesInteractor(service: RemoteService())),
+      home: MoviesListRoute(interactor: MoviesInteractor(service: RemoteService())),
     );
   }
 }

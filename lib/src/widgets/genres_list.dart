@@ -5,8 +5,9 @@ import '../view_utils.dart';
 
 class Genres extends StatelessWidget {
   final List<Genre> genres;
+  final color;
 
-  const Genres({Key key, this.genres}) : super(key: key);
+  const Genres({Key key, this.genres, this.color = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +19,10 @@ class Genres extends StatelessWidget {
     return RichText(
       maxLines: 1,
       text: TextSpan(
-        style: textStyleLight(fontSize: 16),
+        style: textStyleLight(fontSize: 16, color: color),
         children: [
           TextSpan(text: "${genres.first.name}  "),
-          TextSpan(text: secondary, style: TextStyle(color: Colors.white.withOpacity(0.5)))
+          TextSpan(text: secondary, style: TextStyle(color: color.withOpacity(0.5)))
         ],
       ),
     );

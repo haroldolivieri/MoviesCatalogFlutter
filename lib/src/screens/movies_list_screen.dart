@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/genre.dart';
 import 'package:movies_list/src/model/movie.dart';
@@ -7,7 +5,6 @@ import 'package:movies_list/src/widgets/custom_app_bar.dart';
 import 'package:movies_list/src/widgets/custom_page_view.dart';
 import 'package:movies_list/src/widgets/genres_list.dart';
 import 'package:movies_list/src/widgets/movie_card.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:tuple/tuple.dart';
 
 import '../view_utils.dart';
@@ -36,7 +33,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
     _index = 0;
 
     controller = AnimationController(
-      lowerBound: 0.6,
+      lowerBound: 0.8,
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
@@ -64,7 +61,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
     return ScaleTransition(
       scale: animation,
       child: Stack(children: <Widget>[
-        _backgroundImage(parentHeight: height),
+        backgroundImage(parentHeight: height, url: _movie.item1.backdropPath),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -94,7 +91,15 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
               children: widget.items.map((item) {
                 return addSymetricMargin(
                   horizontal: 10,
-                  child: MovieCard(key: ValueKey(item.item1), movie: item.item1, genres: item.item2),
+                  vertical: 5,
+                  child: Hero(
+                    tag: item.item1.posterPath,
+                    child: MovieItem(
+                      key: ValueKey(item.item1),
+                      movie: item.item1,
+                      genres: item.item2
+                    ),
+                  ),
                 );
               }).toList(),
             ));
@@ -125,11 +130,18 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
                     top: 8,
                     child: Genres(genres: _movie.item2),
                   ),
-                  Container(
-                    height: titleHeight,
-                    child: addMargin(
-                      top: 8,
-                      child: Text(_movie.item1.title, maxLines: 2, style: textStyleMedium(fontSize: titleHeight / 3)),
+                  Hero(
+                    tag: _movie.item1.title,
+                    child: Container(
+                      height: titleHeight,
+                      child: addMargin(
+                        top: 8,
+                        child: Text(
+                          _movie.item1.title,
+                          maxLines: 2,
+                          style: textStyleMedium(fontSize: titleHeight / 3),
+                        ),
+                      ),
                     ),
                   ),
                   Row(
@@ -147,26 +159,5 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
             )),
       );
     });
-  }
-
-  _backgroundImage({parentHeight: double}) {
-    return Stack(
-      children: <Widget>[
-        FadeInImage.memoryNetwork(
-          key: ValueKey(_movie.item1.posterPath),
-          height: parentHeight,
-          fit: BoxFit.cover,
-          image: "https://image.tmdb.org/t/p/w200${_movie.item1.backdropPath}",
-          placeholder: kTransparentImage,
-        ),
-        BackdropFilter(
-          filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: new Container(
-            height: parentHeight,
-            decoration: new BoxDecoration(color: Colors.black.withOpacity(0.5)),
-          ),
-        )
-      ],
-    );
   }
 }

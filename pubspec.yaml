@@ -22,6 +22,7 @@ dependencies:
   tuple: ^1.0.2
   rxdart: 0.21.0
   transparent_image: 1.0.0
+  auto_size_text: 1.1.2
 
   flutter:
     sdk: flutter

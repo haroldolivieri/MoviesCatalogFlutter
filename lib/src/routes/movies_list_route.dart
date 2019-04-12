@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/genre.dart';
 import 'package:movies_list/src/model/movie.dart';
+import 'package:movies_list/src/screens/movies_list_screen.dart';
 import 'package:tuple/tuple.dart';
 
 import '../interactor.dart';
 import '../view_utils.dart';
-import 'movies_list_screen.dart';
 
-class MoviesFetch extends StatelessWidget {
+class MoviesListRoute extends StatelessWidget {
   final MoviesInteractor interactor;
 
-  const MoviesFetch({this.interactor});
+  const MoviesListRoute({this.interactor});
 
   @override
   Widget build(BuildContext context) {
