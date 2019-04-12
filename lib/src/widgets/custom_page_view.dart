@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../view_utils.dart';
 
-const SCALE_FRACTION = 0.3;
+const SCALE_FRACTION = 0.4;
 const FULL_SCALE = 1.0;
 
 class CustomPageView extends StatefulWidget {

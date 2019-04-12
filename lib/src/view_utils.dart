@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget withScaffold({Widget body, String title}) {
   return Scaffold(
-    backgroundColor: Colors.black87,
+    backgroundColor: Colors.blueGrey,
     body: body,
   );
 }

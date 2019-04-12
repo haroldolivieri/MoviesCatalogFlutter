@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Montserrat',
         primaryColor: Colors.white,
-          splashColor: Colors.white12.withOpacity(0.1)
+        accentColor: Colors.black,
+        splashColor: Colors.white12.withOpacity(0.1),
       ),
-      home: MoviesFetch(interactor: MoviesInteractor(service: MockService())),
+      home: MoviesFetch(interactor: MoviesInteractor(service: RemoteService())),
     );
   }
 }

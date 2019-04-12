@@ -21,6 +21,7 @@ dependencies:
   async: 2.1.0
   tuple: ^1.0.2
   rxdart: 0.21.0
+  transparent_image: 1.0.0
 
   flutter:
     sdk: flutter

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../view_utils.dart';
 
 class CustomAppBar extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -15,8 +16,6 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               addSymetricMargin(
-                horizontal: 8,
-                vertical: 8,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
@@ -33,8 +32,6 @@ class CustomAppBar extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
               addSymetricMargin(
-                horizontal: 8,
-                vertical: 8,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
