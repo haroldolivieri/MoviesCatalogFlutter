@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/genre.dart';
 import 'package:movies_list/src/model/movie.dart';
-import 'package:movies_list/src/screens/movies_list_screen.dart';
-import 'package:tuple/tuple.dart';
+import 'package:movies_list/src/widgets/common/view_utils.dart';
 
-import '../interactor.dart';
-import '../view_utils.dart';
+import '../../interactor.dart';
+import 'movies_list_screen.dart';
 
 class MoviesListRoute extends StatelessWidget {
   final MoviesInteractor interactor;
@@ -19,7 +17,7 @@ class MoviesListRoute extends StatelessWidget {
       title: 'Movies',
       body: SafeArea(
         child: Center(
-          child: StreamBuilder<List<Tuple2<Movie, List<Genre>>>>(
+          child: StreamBuilder<List<MovieModel>>(
             stream: interactor.getMovies(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasError)

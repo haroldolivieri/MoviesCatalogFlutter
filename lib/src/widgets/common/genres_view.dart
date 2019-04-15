@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/genre.dart';
-
-import '../view_utils.dart';
+import 'package:movies_list/src/model/genre_response.dart';
+import 'package:movies_list/src/widgets/common/view_utils.dart';
 
 class Genres extends StatelessWidget {
   final List<Genre> genres;

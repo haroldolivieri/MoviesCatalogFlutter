@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../view_utils.dart';
-
-const SCALE_FRACTION = 0.3;
-const FULL_SCALE = 1.0;
+import 'package:movies_list/src/widgets/common/view_utils.dart';
 
 class CustomPageView extends StatefulWidget {
   final List<Widget> children;
@@ -66,10 +62,7 @@ class _CustomPageViewState extends State<CustomPageView> {
                 animation: _controller,
                 child: widget.children[index],
                 builder: (BuildContext context, child) {
-                  final diffPosition = _page - index;
-                  double normalizedDistortion = (FULL_SCALE - (diffPosition.abs() * SCALE_FRACTION)).clamp(0.0, 1.0);
-
-                  final double distortionValue = Curves.ease.transform(normalizedDistortion);
+                  final double distortionValue = Curves.ease.transform(distortionBasedOnPage(_page, index));
                   return Center(child: SizedBox(height: distortionValue * widget.height, child: child));
                 },
               );

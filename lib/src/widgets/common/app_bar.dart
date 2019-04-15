@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../view_utils.dart';
+import 'package:movies_list/src/widgets/common/view_utils.dart';
 
 class CustomAppBar extends StatelessWidget {
 

@@ -23,6 +23,15 @@ Widget addMargin({Widget child, double top = 0.0, double bottom = 0.0, double le
   return Container(margin: EdgeInsets.only(top: top, bottom: bottom, left: left, right: right), child: child);
 }
 
+double distortionBasedOnPage(double page, int index) {
+  const SCALE_FRACTION = 0.3;
+  const FULL_SCALE = 1.0;
+  
+  final diffPosition = page - index;
+  double normalizedDistortion = (FULL_SCALE - (diffPosition.abs() * SCALE_FRACTION)).clamp(0.0, 1.0);
+  return normalizedDistortion;
+}
+
 class RemoveDefaultScrollGlowBehavior extends ScrollBehavior {
   @override
   Widget buildViewportChrome(BuildContext context, Widget child, AxisDirection axisDirection) {

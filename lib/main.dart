@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/data/service.dart';
 import 'package:movies_list/src/interactor.dart';
-import 'package:movies_list/src/routes/movies_list_route.dart';
+import 'package:movies_list/src/widgets/movieslist/movies_fetching.dart';
 
 void main() => runApp(MyApp());
 

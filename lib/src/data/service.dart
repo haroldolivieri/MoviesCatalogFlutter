@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
-import 'package:movies_list/src/model/genre.dart';
-import 'package:movies_list/src/model/movie.dart';
+import 'package:movies_list/src/model/genre_response.dart';
+import 'package:movies_list/src/model/movie_response.dart';
 
 import 'api_key.dart';
 
