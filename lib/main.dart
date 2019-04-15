@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.black,
         splashColor: Colors.white12.withOpacity(0.1),
       ),
-      home: MoviesListRoute(interactor: MoviesInteractor(service: RemoteService())),
+      home: MoviesListRoute(interactor: MoviesInteractor(service: MockService())),
     );
   }
 }
