@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/widgets/common/app_bar.dart';
@@ -58,7 +60,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
     return ScaleTransition(
       scale: animation,
       child: Stack(children: <Widget>[
-        backgroundImage(parentHeight: height, url: _movieModel.movie.backdropPath),
+        backgroundImage(height: height, url: _movieModel.movie.backdropPath),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,6 +83,24 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
           ],
         )
       ]),
+    );
+  }
+
+  backgroundImage({height: double, String url}) {
+    return Hero(
+      tag: url,
+      child: Stack(
+        children: <Widget>[
+          fadeNetworkImage(height: height, url: "https://image.tmdb.org/t/p/w200$url"),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+            child: Container(
+              height: height,
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

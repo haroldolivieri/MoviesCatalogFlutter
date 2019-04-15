@@ -14,7 +14,6 @@ class MoviesListRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return withScaffold(
-      title: 'Movies',
       body: SafeArea(
         child: Center(
           child: StreamBuilder<List<MovieModel>>(

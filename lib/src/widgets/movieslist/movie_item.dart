@@ -3,7 +3,7 @@ import 'package:movies_list/src/model/genre_response.dart';
 import 'package:movies_list/src/model/movie_response.dart';
 import 'package:movies_list/src/widgets/common/movie_card.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
-import 'package:movies_list/src/widgets/moviesdetails/movie_details.dart';
+import 'package:movies_list/src/widgets/moviedetails/movie_details.dart';
 
 class MovieItem extends StatefulWidget {
   final Movie movie;

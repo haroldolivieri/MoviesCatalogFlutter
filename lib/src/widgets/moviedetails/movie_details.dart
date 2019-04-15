@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/genre_response.dart';
 import 'package:movies_list/src/model/movie_response.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
-import 'package:movies_list/src/widgets/moviesdetails/static_movie_details.dart';
+import 'package:movies_list/src/widgets/moviedetails/static_movie_details.dart';
 
 import 'floating_movie_details.dart';
 
@@ -63,8 +63,8 @@ class MovieDetailsRouteState extends State<MovieDetailsRoute> {
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  background: backgroundImageNotBlured(
-                    parentHeight: parentHeight,
+                  background: _backgroundImage(
+                    height: parentHeight,
                     url: widget.movie.backdropPath,
                   ),
                 ),
@@ -88,5 +88,20 @@ class MovieDetailsRouteState extends State<MovieDetailsRoute> {
             offset: offset)
       ],
     ));
+  }
+
+  _backgroundImage({height: double, String url}) {
+    return Hero(
+      tag: url,
+      child: Stack(
+        children: <Widget>[
+          fadeNetworkImage(height: height, url: "https://image.tmdb.org/t/p/original$url"),
+          Container(
+            height: height,
+            decoration: new BoxDecoration(color: Colors.black.withOpacity(0.5)),
+          )
+        ],
+      ),
+    );
   }
 }

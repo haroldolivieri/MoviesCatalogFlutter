@@ -26,7 +26,7 @@ Widget addMargin({Widget child, double top = 0.0, double bottom = 0.0, double le
 double distortionBasedOnPage(double page, int index) {
   const SCALE_FRACTION = 0.3;
   const FULL_SCALE = 1.0;
-  
+
   final diffPosition = page - index;
   double normalizedDistortion = (FULL_SCALE - (diffPosition.abs() * SCALE_FRACTION)).clamp(0.0, 1.0);
   return normalizedDistortion;
@@ -61,47 +61,12 @@ Size contentSizeByKey(GlobalKey key) {
   return size;
 }
 
-backgroundImage({parentHeight: double, String url}) {
-  return Hero(
-    tag: url,
-    child: Stack(
-      children: <Widget>[
-        FadeInImage.memoryNetwork(
-          key: ValueKey(url),
-          height: parentHeight,
-          fit: BoxFit.cover,
-          image: "https://image.tmdb.org/t/p/w200$url",
-          placeholder: kTransparentImage,
-        ),
-        BackdropFilter(
-          filter: new ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-          child: new Container(
-            height: parentHeight,
-            decoration: new BoxDecoration(color: Colors.black.withOpacity(0.5)),
-          ),
-        )
-      ],
-    ),
-  );
-}
-
-backgroundImageNotBlured({parentHeight: double, String url}) {
-  return Hero(
-    tag: url,
-    child: Stack(
-      children: <Widget>[
-        FadeInImage.memoryNetwork(
-          key: ValueKey(url),
-          height: parentHeight,
-          fit: BoxFit.cover,
-          image: "https://image.tmdb.org/t/p/original$url",
-          placeholder: kTransparentImage,
-        ),
-        Container(
-          height: parentHeight,
-          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.5)),
-        )
-      ],
-    ),
+Widget fadeNetworkImage({url: String, height: double}) {
+  return FadeInImage.memoryNetwork(
+    key: ValueKey(url),
+    height: height,
+    fit: BoxFit.cover,
+    image: "https://image.tmdb.org/t/p/w200$url",
+    placeholder: kTransparentImage,
   );
 }
