@@ -29,10 +29,9 @@ class FloatingMovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const TOP_SPACING = 96.0;
-
     return Positioned(
       width: parentWidth,
-      height: parentHeight,
+      height: thumbHeight,
       top: (thumbHeight - offset > TOP_SPACING) ? thumbHeight - offset : TOP_SPACING,
       child: Row(
         children: <Widget>[
