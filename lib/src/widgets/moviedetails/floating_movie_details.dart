@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/movie_response.dart';
+import 'package:movies_list/src/model/change_notifiers.dart';
 import 'package:movies_list/src/widgets/common/movie_card.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
+import 'package:provider/provider.dart';
 
 class FloatingMovieDetails extends StatelessWidget {
   final Color titleColor;
@@ -12,14 +13,12 @@ class FloatingMovieDetails extends StatelessWidget {
   final double thumbHeight;
   final double parentWidth;
   final double parentHeight;
-  final Movie movie;
   final double offset;
 
   const FloatingMovieDetails({
     Key key,
     this.titleColor,
     this.thumbHeight,
-    this.movie,
     this.parentWidth,
     this.parentHeight,
     this.offset,
@@ -29,7 +28,8 @@ class FloatingMovieDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const TOP_SPACING = 96.0;
-
+    final movie = Provider.of<MovieNotifier>(context).movie;
+    
     return Positioned(
       width: parentWidth,
       height: parentHeight,
@@ -43,8 +43,7 @@ class FloatingMovieDetails extends StatelessWidget {
             child: Hero(
               tag: movie.posterPath,
               child: MovieCard(
-                hasShadow: true,
-                urlImage: movie.posterPath,
+                hasShadow: true
               ),
             ),
           ),

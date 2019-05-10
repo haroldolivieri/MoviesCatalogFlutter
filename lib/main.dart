@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/data/service.dart';
-import 'package:movies_list/src/movies_bloc.dart';
+import 'package:movies_list/src/data/movies_bloc.dart';
 import 'package:movies_list/src/widgets/movieslist/movies_fetching.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +18,10 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.black,
         splashColor: Colors.white12.withOpacity(0.1),
       ),
-      home: MoviesListRoute(interactor: MoviesBloc()),
+      home: Provider<MoviesBloc>(
+        builder: (context) => MoviesBloc(),
+        child: MoviesFetching(),
+      ),
     );
   }
 }
