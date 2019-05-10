@@ -34,66 +34,61 @@ class FloatingMovieDetails extends StatelessWidget {
       width: parentWidth,
       height: parentHeight,
       top: (thumbHeight - offset > TOP_SPACING) ? thumbHeight - offset : TOP_SPACING,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left: 16, right: 8),
-                width: thumbWidth,
-                height: thumbHeight,
-                child: Hero(
-                  tag: movie.posterPath,
-                  child: MovieCard(
-                    hasShadow: true,
-                    urlImage: movie.posterPath,
-                  ),
-                ),
+          Container(
+            margin: EdgeInsets.only(left: 16, right: 8),
+            width: thumbWidth,
+            height: thumbHeight,
+            child: Hero(
+              tag: movie.posterPath,
+              child: MovieCard(
+                hasShadow: true,
+                urlImage: movie.posterPath,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 16),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    height: thumbHeight / 1.4,
+                    child: AutoSizeText(
+                      movie.title,
+                      maxLines: 3,
+                      minFontSize: 22,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.start,
+                      style: textStyleMedium(fontSize: 28, color: titleColor),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Container(
-                        height: thumbHeight / 1.4,
-                        child: AutoSizeText(
-                          movie.title,
-                          maxLines: 3,
-                          minFontSize: 22,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                          style: textStyleMedium(fontSize: 28, color: titleColor),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(
+                          Icons.star,
+                          color: Colors.blueGrey,
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Icon(
-                              Icons.star,
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                          Container(
-                            child: AutoSizeText(
-                              movie.voteAverage.toString(),
-                              textAlign: TextAlign.end,
-                              maxLines: 1,
-                              style: textStyleMedium(fontSize: 30, color: Colors.blueGrey),
-                            ),
-                          ),
-                        ],
-                      )
+                      Container(
+                        child: AutoSizeText(
+                          movie.voteAverage.toString(),
+                          textAlign: TextAlign.end,
+                          maxLines: 1,
+                          style: textStyleMedium(fontSize: 30, color: Colors.blueGrey),
+                        ),
+                      ),
                     ],
-                  ),
-                ),
+                  )
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

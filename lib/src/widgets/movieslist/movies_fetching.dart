@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
 
-import '../../interactor.dart';
+import '../../movies_bloc.dart';
 import 'movies_list_screen.dart';
 
 class MoviesListRoute extends StatelessWidget {
-  final MoviesInteractor interactor;
+  final MoviesBloc interactor;
 
   const MoviesListRoute({this.interactor});
 

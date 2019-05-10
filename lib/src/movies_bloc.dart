@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:movies_list/src/data/service.dart';
 import 'package:movies_list/src/model/genre_response.dart';
 import 'package:movies_list/src/model/movie_response.dart';
@@ -6,16 +5,17 @@ import 'package:rxdart/rxdart.dart';
 
 import 'model/movie.dart';
 
-class MoviesInteractor {
-  final Service service;
+class MoviesBloc {
+  final Service _service = MockService();
 
-  const MoviesInteractor({@required this.service});
+  Observable<List<MovieModel>> get allMovies => getMovies();
 
   Stream<List<MovieModel>> getMovies() {
-    final moviesStream = Observable.fromFuture(service.fetchMovies()).flatMap(
+    final moviesStream = Observable.fromFuture(_service.fetchMovies()).flatMap(
       (movies) => Observable.fromIterable(movies),
     );
-    final genresStream = Observable.fromFuture(service.fetchGenres());
+
+    final genresStream = Observable.fromFuture(_service.fetchGenres());
 
     return Observable.combineLatest2(
       moviesStream,
