@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/genre_response.dart';
+import 'package:movies_list/src/model/change_notifiers.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
+import 'package:provider/provider.dart';
 
 class Genres extends StatelessWidget {
-  final List<Genre> genres;
   final color;
 
-  const Genres({Key key, this.genres, this.color = Colors.white}) : super(key: key);
+  const Genres({Key key, this.color = Colors.white}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final genres = Provider.of<MovieNotifier>(context).genres;
     final secondaryGenres = genres.where((genre) => genres.first.id != genre.id);
 
     String secondary = "";

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_list/src/model/genre_response.dart';
+import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/model/movie_response.dart';
 import 'package:movies_list/src/widgets/common/movie_card.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
-import 'package:movies_list/src/widgets/moviedetails/movie_details.dart';
+import 'package:movies_list/src/widgets/moviedetails/movie_details_screen.dart';
 
 class MovieItem extends StatefulWidget {
   final Movie movie;
@@ -37,10 +38,11 @@ class MovieItemState extends State<MovieItem> with SingleTickerProviderStateMixi
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => MovieDetailsRoute(
+          builder: (context) => MovieDetailsScreen(
+                  movieModel: MovieModel(
                 movie: widget.movie,
                 genres: widget.genres,
-              )),
+              ))),
     );
   }
 
@@ -56,7 +58,7 @@ class MovieItemState extends State<MovieItem> with SingleTickerProviderStateMixi
             child: Transform.scale(
               scale: scale,
               child: MovieCard(
-                urlImage: widget.movie.posterPath,
+                urlImage: widget.movie.backdropPath,
                 radius: 20,
                 hasShadow: true,
               ),

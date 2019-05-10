@@ -1,9 +1,9 @@
 import 'package:movies_list/src/data/service.dart';
 import 'package:movies_list/src/model/genre_response.dart';
+import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/model/movie_response.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'model/movie.dart';
 
 class MoviesBloc {
   final Service _service = MockService();

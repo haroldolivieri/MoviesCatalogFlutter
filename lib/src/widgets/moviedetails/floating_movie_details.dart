@@ -2,33 +2,34 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/movie_response.dart';
+import 'package:movies_list/src/model/change_notifiers.dart';
 import 'package:movies_list/src/widgets/common/movie_card.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
+import 'package:provider/provider.dart';
 
 class FloatingMovieDetails extends StatelessWidget {
-  final Color titleColor;
-  final double thumbWidth;
-  final double thumbHeight;
   final double parentWidth;
   final double parentHeight;
-  final Movie movie;
-  final double offset;
+  final thumbHeight;
 
-  const FloatingMovieDetails({
-    Key key,
-    this.titleColor,
-    this.thumbHeight,
-    this.movie,
-    this.parentWidth,
-    this.parentHeight,
-    this.offset,
-    this.thumbWidth,
-  }) : super(key: key);
+  const FloatingMovieDetails({Key key, this.parentWidth, this.parentHeight, this.thumbHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const TOP_SPACING = 96.0;
+    
+    final movie = Provider.of<MovieNotifier>(context).movie;
+    final offset = Provider.of<ScrollController>(context).offset;
+    final thumbWidth = thumbHeight / 1.3;
+    
+    var _titleColor = Colors.white;
+
+    if (offset > 120) {
+      _titleColor = Colors.black;
+    } else {
+      _titleColor = Colors.white;
+    }
+
     return Positioned(
       width: parentWidth,
       height: thumbHeight,
@@ -41,10 +42,7 @@ class FloatingMovieDetails extends StatelessWidget {
             height: thumbHeight,
             child: Hero(
               tag: movie.posterPath,
-              child: MovieCard(
-                hasShadow: true,
-                urlImage: movie.posterPath,
-              ),
+              child: MovieCard(hasShadow: true),
             ),
           ),
           Expanded(
@@ -62,7 +60,7 @@ class FloatingMovieDetails extends StatelessWidget {
                       minFontSize: 22,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
-                      style: textStyleMedium(fontSize: 28, color: titleColor),
+                      style: textStyleMedium(fontSize: 28, color: _titleColor),
                     ),
                   ),
                   Row(
