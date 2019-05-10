@@ -8,31 +8,31 @@ import 'package:movies_list/src/widgets/common/view_utils.dart';
 import 'package:provider/provider.dart';
 
 class FloatingMovieDetails extends StatelessWidget {
-  final Color titleColor;
-  final double thumbWidth;
-  final double thumbHeight;
   final double parentWidth;
   final double parentHeight;
-  final double offset;
+  final thumbHeight;
 
-  const FloatingMovieDetails({
-    Key key,
-    this.titleColor,
-    this.thumbHeight,
-    this.parentWidth,
-    this.parentHeight,
-    this.offset,
-    this.thumbWidth,
-  }) : super(key: key);
+  const FloatingMovieDetails({Key key, this.parentWidth, this.parentHeight, this.thumbHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const TOP_SPACING = 96.0;
-    final movie = Provider.of<MovieNotifier>(context).movie;
     
+    final movie = Provider.of<MovieNotifier>(context).movie;
+    final offset = Provider.of<ScrollController>(context).offset;
+    final thumbWidth = thumbHeight / 1.3;
+    
+    var _titleColor = Colors.white;
+
+    if (offset > 120) {
+      _titleColor = Colors.black;
+    } else {
+      _titleColor = Colors.white;
+    }
+
     return Positioned(
       width: parentWidth,
-      height: parentHeight,
+      height: thumbHeight,
       top: (thumbHeight - offset > TOP_SPACING) ? thumbHeight - offset : TOP_SPACING,
       child: Row(
         children: <Widget>[
@@ -42,9 +42,7 @@ class FloatingMovieDetails extends StatelessWidget {
             height: thumbHeight,
             child: Hero(
               tag: movie.posterPath,
-              child: MovieCard(
-                hasShadow: true
-              ),
+              child: MovieCard(hasShadow: true),
             ),
           ),
           Expanded(
@@ -62,7 +60,7 @@ class FloatingMovieDetails extends StatelessWidget {
                       minFontSize: 22,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.start,
-                      style: textStyleMedium(fontSize: 28, color: titleColor),
+                      style: textStyleMedium(fontSize: 28, color: _titleColor),
                     ),
                   ),
                   Row(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/model/change_notifiers.dart';
+import 'package:movies_list/src/model/movie.dart';
 import 'package:movies_list/src/widgets/common/view_utils.dart';
 import 'package:movies_list/src/widgets/moviedetails/static_movie_details.dart';
 import 'package:provider/provider.dart';
@@ -8,54 +8,34 @@ import 'package:provider/provider.dart';
 import 'floating_movie_details.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
-  
   final MovieModel movieModel;
+
   const MovieDetailsScreen({Key key, this.movieModel}) : super(key: key);
-  
+
   @override
   State<StatefulWidget> createState() => MovieDetailsScreenState();
 }
 
 class MovieDetailsScreenState extends State<MovieDetailsScreen> {
-  final controller = ScrollController();
-  var titleColor;
-  var offset;
-
-  @override
-  void initState() {
-    super.initState();
-    controller.addListener(onScroll);
-    titleColor = Colors.white;
-    offset = 0.0;
-  }
-
-  onScroll() {
-    print(offset);
-    setState(() {
-      offset = controller.offset;
-
-      if (offset > 120) {
-        titleColor = Colors.black;
-      } else {
-        titleColor = Colors.white;
-      }
-    });
-  }
-
+  final _scrollController = ScrollController();
+  
   @override
   Widget build(BuildContext context) {
     final parentHeight = MediaQuery.of(context).size.height;
     final appBarHeight = parentHeight / 2.5;
     final thumbHeight = appBarHeight / 1.5;
 
-    return ChangeNotifierProvider(
-      builder: (context) => MovieNotifier(widget.movieModel),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (context) => MovieNotifier(widget.movieModel)),
+        ChangeNotifierProvider(builder: (context) => _scrollController)
+      ],
       child: Scaffold(
           body: Stack(
         children: [
           NestedScrollView(
             physics: BouncingScrollPhysics(),
-            controller: controller,
+            controller: _scrollController,
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
@@ -73,15 +53,13 @@ class MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 )
               ];
             },
-            body: StaticMovieDetails(offset: offset, height: thumbHeight),
+            body: StaticMovieDetails(thumbHeight: thumbHeight),
           ),
           FloatingMovieDetails(
-              titleColor: titleColor,
-              thumbWidth: thumbHeight / 1.3,
-              thumbHeight: thumbHeight,
-              parentWidth: MediaQuery.of(context).size.width,
-              parentHeight: parentHeight,
-              offset: offset)
+            parentWidth: MediaQuery.of(context).size.width,
+            parentHeight: parentHeight,
+            thumbHeight: thumbHeight,
+          )
         ],
       )),
     );

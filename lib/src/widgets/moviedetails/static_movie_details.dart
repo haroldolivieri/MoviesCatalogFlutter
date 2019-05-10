@@ -6,21 +6,21 @@ import 'package:movies_list/src/widgets/common/view_utils.dart';
 import 'package:provider/provider.dart';
 
 class StaticMovieDetails extends StatelessWidget {
-  final double offset;
-  final double height;
+  final thumbHeight;
 
-  const StaticMovieDetails({Key key, this.offset, this.height}) : super(key: key);
+  const StaticMovieDetails({Key key, this.thumbHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final movie = Provider.of<MovieNotifier>(context).movie;
+    final offset = Provider.of<ScrollController>(context).offset;
 
     return Transform.translate(
       offset: Offset(0, offset * 0.7),
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24),
         child: Container(
-          margin: EdgeInsets.only(top: height * 0.6),
+          margin: EdgeInsets.only(top: thumbHeight * 0.6),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
