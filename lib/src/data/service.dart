@@ -15,7 +15,7 @@ mixin Service {
 
 class RemoteService implements Service {
   String _baseUrl = "api.themoviedb.org";
-  var _queryParameters = {'api_key': API_KEY};
+  var _queryParameters = {'api_key.dart': API_KEY};
 
   @override
   Future<List<Movie>> fetchMovies() async {
