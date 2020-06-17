@@ -70,10 +70,10 @@ class MovieDetailsScreenState extends State<MovieDetailsScreen> {
       tag: url,
       child: Stack(
         children: <Widget>[
-          fadeNetworkImage(height: height, url: "https://image.tmdb.org/t/p/original$url"),
+          fadeNetworkImage(height: height, url: url),
           Container(
             height: height,
-            decoration: new BoxDecoration(color: Colors.black.withOpacity(0.5)),
+            decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
           )
         ],
       ),

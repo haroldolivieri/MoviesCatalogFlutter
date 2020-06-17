@@ -19,7 +19,8 @@ class MoviesListScreen extends StatefulWidget {
   State<StatefulWidget> createState() => _MoviesListScreenState();
 }
 
-class _MoviesListScreenState extends State<MoviesListScreen> with TickerProviderStateMixin {
+class _MoviesListScreenState extends State<MoviesListScreen>
+    with TickerProviderStateMixin {
   AnimationController controller;
   Animation<double> animation;
 
@@ -42,7 +43,8 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (context) => MovieNotifier(widget.items[0])),
+        ChangeNotifierProvider(
+            builder: (context) => MovieNotifier(widget.items[0])),
         ChangeNotifierProvider(builder: (context) => PageNotifier()),
         ChangeNotifierProvider(builder: (context) => IndexNotifier()),
       ],
@@ -73,25 +75,25 @@ class _MoviesListScreenState extends State<MoviesListScreen> with TickerProvider
   backgroundImage({height: double, String url}) {
     return Consumer<MovieNotifier>(
       builder: (context, notifier, _) => Hero(
-            tag: notifier.movie.id,
-            child: Stack(
-              children: <Widget>[
-                fadeNetworkImage(
-                  height: height,
-                  url: "https://image.tmdb.org/t/p/w200${notifier.movie.backdropPath}",
-                ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-                  child: Container(
-                    height: height,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                )
-              ],
+        tag: notifier.movie.id,
+        child: Stack(
+          children: <Widget>[
+            fadeNetworkImage(
+              height: height,
+              url: notifier.movie.backdropPath,
             ),
-          ),
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+              child: Container(
+                height: height,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

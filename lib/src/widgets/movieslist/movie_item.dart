@@ -58,7 +58,7 @@ class MovieItemState extends State<MovieItem> with SingleTickerProviderStateMixi
             child: Transform.scale(
               scale: scale,
               child: MovieCard(
-                urlImage: widget.movie.backdropPath,
+                urlImage: widget.movie.posterPath,
                 radius: 20,
                 hasShadow: true,
               ),

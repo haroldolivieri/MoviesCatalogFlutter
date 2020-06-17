@@ -6,7 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 
 class MoviesBloc {
-  final Service _service = MockService();
+  final Service _service = RemoteService();
 
   Observable<List<MovieModel>> get allMovies => getMovies();
 

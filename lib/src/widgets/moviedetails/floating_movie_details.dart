@@ -12,16 +12,18 @@ class FloatingMovieDetails extends StatelessWidget {
   final double parentHeight;
   final thumbHeight;
 
-  const FloatingMovieDetails({Key key, this.parentWidth, this.parentHeight, this.thumbHeight}) : super(key: key);
+  const FloatingMovieDetails(
+      {Key key, this.parentWidth, this.parentHeight, this.thumbHeight})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     const TOP_SPACING = 96.0;
-    
+
     final movie = Provider.of<MovieNotifier>(context).movie;
     final offset = Provider.of<ScrollController>(context).offset;
     final thumbWidth = thumbHeight / 1.3;
-    
+
     var _titleColor = Colors.white;
 
     if (offset > 120) {
@@ -33,7 +35,9 @@ class FloatingMovieDetails extends StatelessWidget {
     return Positioned(
       width: parentWidth,
       height: thumbHeight,
-      top: (thumbHeight - offset > TOP_SPACING) ? thumbHeight - offset : TOP_SPACING,
+      top: (thumbHeight - offset > TOP_SPACING)
+          ? thumbHeight - offset
+          : TOP_SPACING,
       child: Row(
         children: <Widget>[
           Container(
@@ -42,7 +46,10 @@ class FloatingMovieDetails extends StatelessWidget {
             height: thumbHeight,
             child: Hero(
               tag: movie.posterPath,
-              child: MovieCard(hasShadow: true),
+              child: MovieCard(
+                hasShadow: true,
+                urlImage: movie.posterPath,
+              ),
             ),
           ),
           Expanded(
@@ -78,7 +85,8 @@ class FloatingMovieDetails extends StatelessWidget {
                           movie.voteAverage.toString(),
                           textAlign: TextAlign.end,
                           maxLines: 1,
-                          style: textStyleMedium(fontSize: 30, color: Colors.blueGrey),
+                          style: textStyleMedium(
+                              fontSize: 30, color: Colors.blueGrey),
                         ),
                       ),
                     ],

@@ -66,7 +66,7 @@ Widget fadeNetworkImage({url: String, height: double}) {
     key: ValueKey(url),
     height: height,
     fit: BoxFit.cover,
-    image: "https://image.tmdb.org/t/p/w200$url",
+    image: "https://image.tmdb.org/t/p/original$url",
     placeholder: kTransparentImage,
   );
 }
